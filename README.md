@@ -1,61 +1,62 @@
-# House Price Prediction Microservice
+# House Price Prediction Production Ready Microservice
 
 ## Overview
 
-This project is an end-to-end, production-ready microservice for predicting house prices based on property features. It uses RandomForest and exposes a Flask API that enables seamless communication between the user and the model, allowing for real-time price predictions.
+This project implements an end-to-end, production-ready microservice for predicting house prices based on property features. It uses a trained **RandomForest** model and exposes a **Flask API** that enables users to input property details and receive real-time price predictions.
 
-The goal of this project is to demonstrate the process of transforming machine learning models into operational microservices that can be easily integrated into a production environment. 
+The purpose of this project is to demonstrate the process of transforming machine learning models into operational microservices that can be easily integrated into production environments.
 
 ## Key Features
 
-- **Machine Learning Model**: A trained RandomForest model that predicts house prices based on features like area, construction year, number of bedrooms, and more.
-- **Flask API**: A simple yet efficient Flask-based web server that accepts GET and POST requests to receive property details and return price predictions.
-- **Real-time Prediction**: Users can submit data (via URL query parameters or JSON body) and receive accurate price predictions instantly.
-- **Validation**: Inputs are validated using Pydantic, ensuring the data conforms to the expected schema before being processed by the model.
+- **Machine Learning Model**: A RandomForest model trained to predict house prices based on features such as area, construction year, number of bedrooms, and more.
+- **Flask API**: A lightweight web server built using Flask that supports both **GET** and **POST** requests to receive property details and return price predictions.
+- **Real-time Prediction**: Users can submit property details via URL query parameters or JSON body and receive price predictions instantly.
+- **Data Validation**: Inputs are validated using **Pydantic** to ensure that the data conforms to the expected schema before being passed to the model.
 
 ## Technologies Used
 
-- **Flask**: Lightweight web framework for building and serving the API.
-- **Pydantic**: Data validation for incoming requests to ensure the integrity of input data.
-- **Scikit-Learn 1.3.1**: Python library used to build the machine learning model for price prediction.
-- **Python 3.10.15**: The programming language used for implementing the microservice and machine learning model.
-
+- **Flask**: A micro web framework for building and serving the API.
+- **Pydantic**: A data validation library used to ensure data integrity for incoming requests.
+- **Scikit-Learn (v1.3.1)**: A Python library used to build the machine learning model.
+- **Python 3.10.15**: The programming language used to implement both the microservice and the machine learning model.
 
 ## Setup & Installation
 
-Follow these steps to get the project running locally:
+Follow these steps to run the project locally:
 
 ### 1. Clone the Repository
+Clone the repository and navigate to the app directory:
 ```bash
 git clone https://github.com/Adeliyio/House-Price-Prediction.git
-cd app
-2. Set Up a Virtual Environment (Optional but recommended)
-bash
-Copy code
+cd House-Price-Prediction/app
+```
+### 2. Set Up a Virtual Environment (Optional but recommended)
+```
+Create a virtual environment and activate it:
 python -m venv venv
 source venv/bin/activate  # For MacOS/Linux
 venv\Scripts\activate     # For Windows
-3. Install Dependencies
-using poetry:
+```
+### 3. Install Dependencies
+If you're using Poetry to manage dependencies, run the following:
+```
+poetry install
+```
+### 4. Run the Flask Application
+Start the Flask server:
+```
+python run.py
 
-4. Run the Flask Application
-Once everything is set up, you can run the Flask app using the following command:
-
-bash
-Copy code
-python app.py
-This will start the Flask server on http://127.0.0.1:5000.
-
-5. Access the API
-You can now interact with the prediction API via your browser or a tool like Postman or curl.
-
+This will start the server at http://127.0.0.1:5000.
+```
+### 5. Access the API
+You can now interact with the prediction API via a browser or a tool like Postman or cURL.
+```
 GET Request Example:
-
 bash
 Copy code
 http://127.0.0.1:5000/pred/?area=1200&construction_year=2000&bedrooms=3&garden_area=50&balcony_present=1&parking_present=1&furnished=1&garage_present=0&storage_present=1
 POST Request Example:
-
 bash
 Copy code
 curl -X POST http://127.0.0.1:5000/pred/ -H "Content-Type: application/json" -d '{
@@ -69,9 +70,10 @@ curl -X POST http://127.0.0.1:5000/pred/ -H "Content-Type: application/json" -d 
   "garage_present": 0,
   "storage_present": 1
 }'
-6. View the Prediction
-The API will return a JSON object with the predicted price, for example:
-
+```
+### 6. View the Prediction
+The API will return a JSON object with the predicted price:
+```
 json
 Copy code
 {
@@ -79,7 +81,8 @@ Copy code
 }
 API Endpoints
 1. GET /pred/
-Description: Retrieve a prediction for house price based on the query parameters.
+Retrieve a house price prediction based on query parameters.
+
 Request Parameters:
 area: int (e.g., 1200)
 construction_year: int (e.g., 2000)
@@ -91,9 +94,9 @@ furnished: int (1 or 0)
 garage_present: int (1 or 0)
 storage_present: int (1 or 0)
 2. POST /pred/
-Description: Retrieve a prediction for house price based on the provided JSON data.
-Request Body: JSON object containing the same fields as the GET request parameters.
-Example:
+Retrieve a house price prediction based on JSON data provided in the body of the request.
+
+Request Body:
 json
 Copy code
 {
@@ -108,14 +111,28 @@ Copy code
   "storage_present": 1
 }
 Running the Model in Production
-This microservice is designed to be easily deployable in any production environment. It can be containerized using Docker and deployed to platforms like AWS, Azure, or Google Cloud. The following steps can be taken to prepare it for production deployment:
+This microservice is designed to be easily deployable in production environments. Here are the steps to prepare the service for deployment:
+```
+### 7. Dockerize the Application (Optional)
+To containerize the application:
+```
+Create a Dockerfile in the root directory.
+Build the Docker image:
+bash
+Copy code
+docker build -t house-price-prediction .
+Run the Docker container:
+bash
+Copy code
+docker run -p 5000:5000 house-price-prediction
+Deploy on Cloud
+You can deploy this application to cloud platforms such as:
 
-Dockerize the Application (Optional):
-
-Create a Dockerfile to package the application.
-Build and run the Docker container using docker build and docker run.
-Deploy on Cloud:
-
-You can deploy the Flask application to cloud platforms like AWS EC2, Google Cloud Run, or Heroku.
+AWS EC2
+Google Cloud Run
+Heroku
 Contributing
-If you would like to contribute to this project, feel free to fork the repository, create a branch, and submit a pull request. All contributions are welcome!
+If you'd like to contribute to this project:
+```
+
+All contributions are welcome!
