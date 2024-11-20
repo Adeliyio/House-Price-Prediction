@@ -113,6 +113,13 @@ Copy code
 Running the Model in Production
 This microservice is designed to be easily deployable in production environments. Here are the steps to prepare the service for deployment:
 ```
+
+## Prediction Result
+
+Here is an example of the prediction result:
+
+![Prediction Result](https://github.com/Adeliyio/House-Price-Prediction/raw/main/prediction.jpg)
+
 ### 7. Dockerize the Application (Optional)
 To containerize the application:
 ```
