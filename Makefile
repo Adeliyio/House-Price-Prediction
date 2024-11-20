@@ -2,7 +2,7 @@
 .DEFAULT_GOAL:=runner
 
 run: install
-	cd src; poetry run python3 runner.py 
+	cd app; poetry run python3 run.py 
 
 install: pyproject.toml
 	poetry install
@@ -11,6 +11,6 @@ clean:
 	rm -rf `find . -type d -name __pycache__`
 
 check:
-	poetry run flake8 src/
+	poetry run flake8 app/
 
-runner: check run clean 
+runner: check run clean
